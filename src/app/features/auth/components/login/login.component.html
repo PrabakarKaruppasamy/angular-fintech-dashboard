@@ -1,0 +1,95 @@
+<div class="login-page">
+  <!-- Theme toggle -->
+  <button class="theme-btn" (click)="themeService.toggle()" title="Toggle theme">
+    <span class="material-icons">{{ themeService.isDark() ? 'light_mode' : 'dark_mode' }}</span>
+  </button>
+
+  <div class="login-card card fade-in">
+    <!-- Header -->
+    <div class="login-header">
+      <div class="logo">
+        <span class="logo-icon">📈</span>
+        <div>
+          <h1 class="logo-title">FinTech Dashboard</h1>
+          <p class="logo-sub">Enterprise Portfolio Management</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo credentials -->
+    <div class="demo-section">
+      <p class="demo-label">Quick Demo Access</p>
+      <div class="demo-btns">
+        <button
+          *ngFor="let cred of demoCredentials"
+          class="demo-btn"
+          [style.borderColor]="cred.color"
+          [style.color]="cred.color"
+          (click)="fillDemo(cred.email, cred.password)">
+          <span class="material-icons sm">person</span>
+          {{ cred.role }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <!-- Error -->
+      <div class="error-banner" *ngIf="error()">
+        <span class="material-icons sm">error_outline</span>
+        {{ error() }}
+      </div>
+
+      <!-- Email -->
+      <div class="field">
+        <label for="email">Email Address</label>
+        <div class="input-wrap">
+          <span class="material-icons input-icon sm">email</span>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            placeholder="you@company.com"
+            autocomplete="email"
+            [class.invalid]="emailCtrl.invalid && emailCtrl.touched">
+        </div>
+        <span class="field-error" *ngIf="emailCtrl.invalid && emailCtrl.touched">
+          Enter a valid email address
+        </span>
+      </div>
+
+      <!-- Password -->
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <span class="material-icons input-icon sm">lock</span>
+          <input
+            id="password"
+            [type]="showPassword() ? 'text' : 'password'"
+            formControlName="password"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            [class.invalid]="passwordCtrl.invalid && passwordCtrl.touched">
+          <button type="button" class="eye-btn" (click)="showPassword.set(!showPassword())">
+            <span class="material-icons sm">{{ showPassword() ? 'visibility_off' : 'visibility' }}</span>
+          </button>
+        </div>
+        <span class="field-error" *ngIf="passwordCtrl.invalid && passwordCtrl.touched">
+          Password must be at least 6 characters
+        </span>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn btn-primary submit-btn" [disabled]="loading()">
+        <span class="spinner-sm" *ngIf="loading()"></span>
+        <span class="material-icons sm" *ngIf="!loading()">login</span>
+        {{ loading() ? 'Signing in...' : 'Sign In' }}
+      </button>
+    </form>
+
+    <p class="footer-note">
+      Built with Angular 19 · NgRx · Chart.js<br>
+      <span>By Prabakar Karuppasamy</span>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<header class="header">
+  <div class="header-left">
+    <button class="icon-btn" (click)="menuToggled.emit()" title="Toggle sidebar">
+      <span class="material-icons">menu</span>
+    </button>
+    <div class="breadcrumb">
+      <span class="material-icons sm">dashboard</span>
+      <span>Dashboard</span>
+    </div>
+  </div>
+
+  <div class="header-right">
+    <!-- Live indicator -->
+    <div class="live-badge">
+      <span class="pulse"></span>
+      LIVE
+    </div>
+
+    <!-- Theme toggle -->
+    <button class="icon-btn" (click)="themeService.toggle()" title="Toggle theme">
+      <span class="material-icons">{{ themeService.isDark() ? 'light_mode' : 'dark_mode' }}</span>
+    </button>
+
+    <!-- Notifications -->
+    <div class="notif-wrap">
+      <button class="icon-btn" (click)="showNotifications = !showNotifications" title="Notifications">
+        <span class="material-icons">notifications</span>
+        <span class="badge-dot" *ngIf="notificationService.unreadCount() > 0">
+          {{ notificationService.unreadCount() }}
+        </span>
+      </button>
+      <app-notifications
+        *ngIf="showNotifications"
+        (closed)="showNotifications = false">
+      </app-notifications>
+    </div>
+
+    <!-- User -->
+    <div class="user-pill" *ngIf="authService.currentUser() as user">
+      <div class="avatar-sm">{{ user.avatar }}</div>
+      <span class="user-name-sm">{{ user.name.split(' ')[0] }}</span>
+    </div>
+  </div>
+</header>

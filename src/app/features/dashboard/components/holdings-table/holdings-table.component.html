@@ -1,0 +1,40 @@
+<div class="holdings-card card">
+  <h3 class="card-title">Holdings</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Qty</th>
+          <th class="text-right">Value</th>
+          <th class="text-right">P&amp;L</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let h of holdings">
+          <td>
+            <div class="symbol-cell">
+              <div class="sym-badge">{{ h.symbol.slice(0,2) }}</div>
+              <div>
+                <span class="sym-name">{{ h.symbol }}</span>
+                <span class="sym-full">{{ h.name }}</span>
+              </div>
+            </div>
+          </td>
+          <td class="qty">{{ h.quantity }}</td>
+          <td class="text-right">${{ h.value | number:'1.0-0' }}</td>
+          <td class="text-right">
+            <div class="pnl-cell">
+              <span [class]="h.pnl >= 0 ? 'text-positive' : 'text-negative'">
+                {{ h.pnl >= 0 ? '+' : '' }}${{ h.pnl | number:'1.0-0' }}
+              </span>
+              <span class="pnl-pct badge" [class]="h.pnl >= 0 ? 'badge-positive' : 'badge-negative'">
+                {{ h.pnlPercent >= 0 ? '+' : '' }}{{ h.pnlPercent | number:'1.1-1' }}%
+              </span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

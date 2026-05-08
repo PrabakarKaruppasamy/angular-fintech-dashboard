@@ -1,0 +1,26 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Angular
+dist/
+.angular/
+out-tsc/
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db

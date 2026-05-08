@@ -1,0 +1,34 @@
+<div class="dashboard fade-in">
+  <!-- Market Ticker -->
+  <app-market-ticker [quotes]="quotes()" />
+
+  <!-- Page Title -->
+  <div class="page-header">
+    <div>
+      <h2 class="page-title">Portfolio Overview</h2>
+      <p class="page-sub">Real-time market data · Updated every 3 seconds</p>
+    </div>
+    <span class="last-updated">
+      <span class="material-icons sm">schedule</span>
+      Live
+    </span>
+  </div>
+
+  <!-- Portfolio Summary Cards -->
+  <app-portfolio-summary [portfolio]="portfolio()" [loading]="loading()" />
+
+  <!-- Chart + Holdings -->
+  <div class="grid-2">
+    <app-stock-chart />
+    <app-holdings-table [holdings]="holdings()" [loading]="loading()" />
+  </div>
+
+  <!-- Recent Transactions -->
+  <div class="section-header">
+    <h3>Recent Transactions</h3>
+    <a routerLink="/dashboard/transactions" class="view-all-btn">
+      View All <span class="material-icons sm">arrow_forward</span>
+    </a>
+  </div>
+  <app-transaction-table [limit]="5" />
+</div>

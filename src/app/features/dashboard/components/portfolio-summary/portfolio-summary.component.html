@@ -1,0 +1,71 @@
+<div class="summary-grid">
+  <!-- Skeleton loading -->
+  <ng-container *ngIf="loading">
+    <div class="summary-card card skeleton" *ngFor="let i of [1,2,3,4]"></div>
+  </ng-container>
+
+  <ng-container *ngIf="!loading && portfolio">
+    <!-- Total Value -->
+    <div class="summary-card card">
+      <div class="card-top">
+        <div class="card-icon icon-blue">
+          <span class="material-icons">account_balance_wallet</span>
+        </div>
+        <span class="badge badge-positive">
+          <span class="material-icons sm">trending_up</span>
+          +{{ portfolio.dayChangePercent | number:'1.2-2' }}%
+        </span>
+      </div>
+      <p class="card-label">Total Portfolio Value</p>
+      <h2 class="card-value">${{ portfolio.totalValue | number:'1.0-0' }}</h2>
+      <p class="card-sub">
+        <span [class]="portfolio.dayChange >= 0 ? 'text-positive' : 'text-negative'">
+          {{ portfolio.dayChange >= 0 ? '+' : '' }}${{ portfolio.dayChange | number:'1.2-2' }} today
+        </span>
+      </p>
+    </div>
+
+    <!-- Total P&L -->
+    <div class="summary-card card">
+      <div class="card-top">
+        <div class="card-icon icon-green">
+          <span class="material-icons">trending_up</span>
+        </div>
+        <span class="badge" [class]="portfolio.totalPnL >= 0 ? 'badge-positive' : 'badge-negative'">
+          {{ portfolio.totalPnL >= 0 ? '+' : '' }}{{ portfolio.totalPnLPercent | number:'1.2-2' }}%
+        </span>
+      </div>
+      <p class="card-label">Total P&amp;L</p>
+      <h2 class="card-value" [class]="portfolio.totalPnL >= 0 ? 'text-positive' : 'text-negative'">
+        {{ portfolio.totalPnL >= 0 ? '+' : '' }}${{ portfolio.totalPnL | number:'1.0-0' }}
+      </h2>
+      <p class="card-sub">Invested: ${{ portfolio.totalInvested | number:'1.0-0' }}</p>
+    </div>
+
+    <!-- Day Change -->
+    <div class="summary-card card">
+      <div class="card-top">
+        <div class="card-icon icon-purple">
+          <span class="material-icons">show_chart</span>
+        </div>
+      </div>
+      <p class="card-label">Today's Change</p>
+      <h2 class="card-value" [class]="portfolio.dayChange >= 0 ? 'text-positive' : 'text-negative'">
+        {{ portfolio.dayChange >= 0 ? '+' : '' }}${{ portfolio.dayChange | number:'1.2-2' }}
+      </h2>
+      <p class="card-sub">{{ portfolio.dayChangePercent | number:'1.2-2' }}% from yesterday</p>
+    </div>
+
+    <!-- Cash Balance -->
+    <div class="summary-card card">
+      <div class="card-top">
+        <div class="card-icon icon-orange">
+          <span class="material-icons">savings</span>
+        </div>
+      </div>
+      <p class="card-label">Cash Balance</p>
+      <h2 class="card-value">${{ portfolio.cashBalance | number:'1.0-0' }}</h2>
+      <p class="card-sub">Available to invest</p>
+    </div>
+  </ng-container>
+</div>

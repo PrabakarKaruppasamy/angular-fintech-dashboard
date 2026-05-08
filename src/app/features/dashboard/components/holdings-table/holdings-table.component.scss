@@ -1,0 +1,51 @@
+.holdings-card { padding: 20px; }
+.card-title { font-size: 15px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary); }
+.table-wrap { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; }
+
+th {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  &.text-right { text-align: right; }
+}
+
+td {
+  padding: 10px 10px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+  &.text-right { text-align: right; }
+  &.qty { color: var(--text-muted); }
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg-table-alt); }
+
+.symbol-cell { display: flex; align-items: center; gap: 10px; }
+
+.sym-badge {
+  width: 30px; height: 30px;
+  background: var(--bg-hover);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.sym-name { display: block; font-weight: 600; font-size: 13px; color: var(--text-primary); }
+.sym-full { display: block; font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px; }
+
+.pnl-cell { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
+.pnl-pct { font-size: 10px; }

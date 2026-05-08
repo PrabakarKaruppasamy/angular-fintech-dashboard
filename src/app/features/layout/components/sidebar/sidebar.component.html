@@ -1,0 +1,44 @@
+<nav class="sidebar" [class.open]="open">
+  <!-- Brand -->
+  <div class="sidebar-brand">
+    <span class="brand-icon">📈</span>
+    <span class="brand-text">FinTech</span>
+  </div>
+
+  <!-- User card -->
+  <div class="user-card" *ngIf="authService.currentUser() as user">
+    <div class="avatar">{{ user.avatar }}</div>
+    <div class="user-info">
+      <span class="user-name">{{ user.name }}</span>
+      <span class="user-role badge" [class.badge-admin]="user.role === 'admin'">
+        {{ user.role | uppercase }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <ul class="nav-list">
+    <li *ngFor="let item of visibleNav">
+      <a class="nav-item"
+         [routerLink]="item.route"
+         routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+         (click)="closed.emit()">
+        <span class="material-icons">{{ item.icon }}</span>
+        <span class="nav-label">{{ item.label }}</span>
+      </a>
+    </li>
+  </ul>
+
+  <!-- Footer -->
+  <div class="sidebar-footer">
+    <button class="nav-item logout-btn" (click)="logout()">
+      <span class="material-icons">logout</span>
+      <span class="nav-label">Sign Out</span>
+    </button>
+    <p class="version">v1.0.0 · Angular 18</p>
+  </div>
+</nav>
+
+<!-- Mobile overlay -->
+<div class="overlay" *ngIf="open" (click)="closed.emit()"></div>

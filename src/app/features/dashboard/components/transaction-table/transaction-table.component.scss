@@ -1,0 +1,87 @@
+.txn-card { padding: 20px; }
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  .search-input { max-width: 100%; }
+}
+
+.filter-row {
+  display: flex;
+  gap: 12px;
+  select { flex: 1; }
+}
+
+.table-wrap { overflow-x: auto; }
+
+.loader-row {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+th {
+  font-size: 11px; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.5px;
+  padding: 8px 12px; text-align: left;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+  &.text-right { text-align: right; }
+}
+
+td {
+  padding: 12px 12px; font-size: 13px; color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color); vertical-align: middle;
+  &.text-right { text-align: right; }
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg-table-alt); }
+
+.type-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  &.type-buy  { background: var(--positive-bg); color: var(--positive); }
+  &.type-sell { background: var(--negative-bg); color: var(--negative); }
+  &.type-div  { background: rgba(128,90,213,0.1); color: var(--accent-purple); }
+  &.type-dep  { background: rgba(49,130,206,0.1); color: var(--accent-blue); }
+  &.type-with { background: rgba(221,107,32,0.1); color: var(--accent-orange); }
+}
+
+.desc-cell { display: flex; flex-direction: column; gap: 2px; }
+.desc-name { font-weight: 600; font-size: 13px; color: var(--text-primary); }
+.desc-sub { font-size: 11px; color: var(--text-muted); }
+
+.date-cell { white-space: nowrap; color: var(--text-muted); font-size: 12px; }
+
+.amount-cell { font-weight: 600; white-space: nowrap; }
+
+.status-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  &.status-ok      { background: var(--positive-bg); color: var(--positive); }
+  &.status-pending { background: rgba(221,107,32,0.1); color: var(--accent-orange); }
+  &.status-fail    { background: var(--negative-bg); color: var(--negative); }
+}
+
+.empty {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 40px; color: var(--text-muted);
+  .material-icons { font-size: 36px; }
+  p { font-size: 14px; }
+}

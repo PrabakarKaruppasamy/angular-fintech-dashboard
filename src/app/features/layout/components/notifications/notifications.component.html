@@ -1,0 +1,39 @@
+<div class="notif-panel card fade-in">
+  <div class="notif-header">
+    <h3>Notifications</h3>
+    <div class="notif-actions">
+      <button class="text-btn" (click)="service.markAllRead()" *ngIf="service.unreadCount() > 0">
+        Mark all read
+      </button>
+      <button class="icon-btn-sm" (click)="closed.emit()">
+        <span class="material-icons sm">close</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="notif-list">
+    <div *ngIf="service.notifications().length === 0" class="empty-state">
+      <span class="material-icons">notifications_none</span>
+      <p>All caught up!</p>
+    </div>
+
+    <div
+      *ngFor="let n of service.notifications()"
+      class="notif-item"
+      [class.unread]="!n.read"
+      [class]="'notif-item type-' + n.type"
+      (click)="service.markAsRead(n.id)">
+      <div class="notif-icon" [class]="'icon-' + n.type">
+        <span class="material-icons sm">{{ iconMap[n.type] }}</span>
+      </div>
+      <div class="notif-body">
+        <p class="notif-title">{{ n.title }}</p>
+        <p class="notif-msg">{{ n.message }}</p>
+        <span class="notif-time">{{ timeAgo(n.timestamp) }}</span>
+      </div>
+      <button class="dismiss-btn" (click)="$event.stopPropagation(); service.dismiss(n.id)">
+        <span class="material-icons sm">close</span>
+      </button>
+    </div>
+  </div>
+</div>
