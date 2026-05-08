@@ -265,8 +265,6 @@ To integrate a real backend:
 Frontend Architect & Technical Lead  
 14+ years building enterprise Angular applications for global banking and fintech organizations.
 
-- BNP Paribas
-- Bank of America
 
 ### Connect
 
