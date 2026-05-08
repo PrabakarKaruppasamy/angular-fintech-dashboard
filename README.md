@@ -220,12 +220,27 @@ To integrate a real backend:
 
 ## 📸 Screenshots
 
-Add screenshots here:
+### Dashboard Overview
 
-```text
-/docs/screenshots/dashboard-dark.png
-/docs/screenshots/dashboard-light.png
-```
+<p align="center">
+  <img src="docs/screenshots/dashboard-dark.png" width="900" />
+</p>
+
+---
+
+### Light Theme
+
+<p align="center">
+  <img src="docs/screenshots/dashboard-light.png" width="900" />
+</p>
+
+---
+
+### Mobile Responsive View
+
+<p align="center">
+  <img src="docs/screenshots/mobile-view.png" width="350" />
+</p>
 
 ---
 
