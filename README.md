@@ -11,7 +11,7 @@
 
 ## 🚀 Live Demo
 
-🔗 https://your-vercel-url.vercel.app
+🔗 https://angular19-fintech-dashboard.vercel.app/login
 
 > Deploy instantly using Vercel or Netlify — see [Deployment](#deployment).
 
