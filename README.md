@@ -1,7 +1,7 @@
 # 📈 Angular FinTech Dashboard
 
 > **Enterprise-grade Financial Portfolio Dashboard** built with Angular 19, standalone components, Signals, NgRx, real-time Chart.js charts, SSO-style authentication, RBAC, and light/dark theme toggle.
-
+[![CI](https://github.com/PrabakarKaruppasamy/angular-fintech-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/PrabakarKaruppasamy/angular-fintech-dashboard/actions)
 [![Angular](https://img.shields.io/badge/Angular-19-DD0031?style=flat-square&logo=angular)](https://angular.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-007ACC?style=flat-square&logo=typescript)](https://typescriptlang.org)
 [![Chart.js](https://img.shields.io/badge/Chart.js-4.4-FF6384?style=flat-square)](https://chartjs.org)
