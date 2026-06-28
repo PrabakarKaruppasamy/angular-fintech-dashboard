@@ -2,42 +2,48 @@
   <!-- Header -->
   <div class="chart-header">
     <div class="symbol-tabs">
-      <button
-        *ngFor="let sym of symbols"
-        class="sym-btn"
-        [class.active]="sym === selectedSymbol()"
-        (click)="selectSymbol(sym)">
-        {{ sym }}
-      </button>
+      @for (sym of symbols; track sym) {
+        <button
+          class="sym-btn"
+          [class.active]="sym === selectedSymbol()"
+          (click)="selectSymbol(sym)">
+          {{ sym }}
+        </button>
+      }
     </div>
     <div class="period-tabs">
-      <button
-        *ngFor="let p of periods"
-        class="period-btn"
-        [class.active]="p === selectedPeriod()"
-        (click)="selectPeriod(p)">
-        {{ p }}
-      </button>
+      @for (p of periods; track p) {
+        <button
+          class="period-btn"
+          [class.active]="p === selectedPeriod()"
+          (click)="selectPeriod(p)">
+          {{ p }}
+        </button>
+      }
     </div>
   </div>
 
   <!-- Quote info -->
-  <div class="quote-info" *ngIf="selectedQuote() as q">
-    <div>
-      <span class="quote-price">${{ q.price | number:'1.2-2' }}</span>
-      <span class="quote-change" [class]="q.change >= 0 ? 'text-positive' : 'text-negative'">
-        {{ q.change >= 0 ? '+' : '' }}{{ q.change | number:'1.2-2' }}
-        ({{ q.changePercent >= 0 ? '+' : '' }}{{ q.changePercent | number:'1.2-2' }}%)
-      </span>
+  @if (selectedQuote(); as q) {
+    <div class="quote-info">
+      <div>
+        <span class="quote-price">${{ q.price | number:'1.2-2' }}</span>
+        <span class="quote-change" [class]="q.change >= 0 ? 'text-positive' : 'text-negative'">
+          {{ q.change >= 0 ? '+' : '' }}{{ q.change | number:'1.2-2' }}
+          ({{ q.changePercent >= 0 ? '+' : '' }}{{ q.changePercent | number:'1.2-2' }}%)
+        </span>
+      </div>
+      <span class="quote-name">{{ q.name }}</span>
     </div>
-    <span class="quote-name">{{ q.name }}</span>
-  </div>
+  }
 
   <!-- Chart -->
   <div class="chart-wrap">
-    <div class="chart-loader" *ngIf="loading()">
-      <div class="spinner"></div>
-    </div>
+    @if (loading()) {
+      <div class="chart-loader">
+        <div class="spinner"></div>
+      </div>
+    }
     <canvas #chartCanvas></canvas>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, signal, computed } from '@angular/core';
+import { Component, Input, OnInit, signal, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MarketDataService } from '../../../../core/services/market-data.service';
@@ -12,6 +12,8 @@ import { Transaction, TransactionType, TransactionStatus } from '../../../../cor
   styleUrls: ['./transaction-table.component.scss']
 })
 export class TransactionTableComponent implements OnInit {
+  private marketService = inject(MarketDataService);
+
   @Input() limit: number | null = null;
 
   transactions = signal<Transaction[]>([]);
@@ -31,7 +33,7 @@ export class TransactionTableComponent implements OnInit {
     return this.limit ? list.slice(0, this.limit) : list;
   });
 
-  constructor(private marketService: MarketDataService) {}
+
 
   ngOnInit(): void {
     this.marketService.getTransactions().subscribe(t => { this.transactions.set(t); this.loading.set(false); });

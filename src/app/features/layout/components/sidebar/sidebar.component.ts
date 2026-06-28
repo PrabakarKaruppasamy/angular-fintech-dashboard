@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
@@ -18,6 +18,8 @@ interface NavItem {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+  authService = inject(AuthService);
+
   @Input() open = true;
   @Output() closed = new EventEmitter<void>();
 
@@ -30,7 +32,7 @@ export class SidebarComponent {
     { label: 'Settings',      icon: 'settings',         route: '/dashboard', adminOnly: true },
   ];
 
-  constructor(public authService: AuthService) {}
+
 
   get visibleNav(): NavItem[] {
     return this.navItems.filter(n => !n.adminOnly || this.authService.isAdmin());

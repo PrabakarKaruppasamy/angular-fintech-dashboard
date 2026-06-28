@@ -9,26 +9,30 @@ import { StockQuote } from '../../../../core/models';
   template: `
     <div class="ticker-bar">
       <div class="ticker-track">
-        <div class="ticker-item" *ngFor="let q of quotes; let i = index">
-          <span class="sym">{{ q.symbol }}</span>
-          <span class="price">$ {{ q.price | number:'1.2-2' }}</span>
-          <span class="chg" [class]="q.changePercent >= 0 ? 'up' : 'down'">
-            <span class="material-icons sm">{{ q.changePercent >= 0 ? 'arrow_drop_up' : 'arrow_drop_down' }}</span>
-            {{ q.changePercent >= 0 ? '+' : '' }}{{ q.changePercent | number:'1.2-2' }}%
-          </span>
-        </div>
+        @for (q of quotes; track q; let i = $index) {
+          <div class="ticker-item">
+            <span class="sym">{{ q.symbol }}</span>
+            <span class="price">$ {{ q.price | number:'1.2-2' }}</span>
+            <span class="chg" [class]="q.changePercent >= 0 ? 'up' : 'down'">
+              <span class="material-icons sm">{{ q.changePercent >= 0 ? 'arrow_drop_up' : 'arrow_drop_down' }}</span>
+              {{ q.changePercent >= 0 ? '+' : '' }}{{ q.changePercent | number:'1.2-2' }}%
+            </span>
+          </div>
+        }
         <!-- Duplicate for seamless loop -->
-        <div class="ticker-item" *ngFor="let q of quotes">
-          <span class="sym">{{ q.symbol }}</span>
-          <span class="price">$ {{ q.price | number:'1.2-2' }}</span>
-          <span class="chg" [class]="q.changePercent >= 0 ? 'up' : 'down'">
-            <span class="material-icons sm">{{ q.changePercent >= 0 ? 'arrow_drop_up' : 'arrow_drop_down' }}</span>
-            {{ q.changePercent >= 0 ? '+' : '' }}{{ q.changePercent | number:'1.2-2' }}%
-          </span>
-        </div>
+        @for (q of quotes; track q) {
+          <div class="ticker-item">
+            <span class="sym">{{ q.symbol }}</span>
+            <span class="price">$ {{ q.price | number:'1.2-2' }}</span>
+            <span class="chg" [class]="q.changePercent >= 0 ? 'up' : 'down'">
+              <span class="material-icons sm">{{ q.changePercent >= 0 ? 'arrow_drop_up' : 'arrow_drop_down' }}</span>
+              {{ q.changePercent >= 0 ? '+' : '' }}{{ q.changePercent | number:'1.2-2' }}%
+            </span>
+          </div>
+        }
       </div>
     </div>
-  `,
+    `,
   styles: [`
     .ticker-bar {
       background: var(--bg-card);

@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, interval, map, startWith, BehaviorSubject } from 'rxjs';
+import { Observable, interval, BehaviorSubject } from 'rxjs';
 import {
   PortfolioSummary, Holding, StockQuote,
-  ChartDataPoint, ChartPeriod, Transaction, TransactionType,
-  TransactionStatus
-} from '../models';
+  ChartDataPoint, ChartPeriod, Transaction } from '../models';
 
 // ── Mock Data ─────────────────────────────────────────────────────
 const BASE_QUOTES: StockQuote[] = [

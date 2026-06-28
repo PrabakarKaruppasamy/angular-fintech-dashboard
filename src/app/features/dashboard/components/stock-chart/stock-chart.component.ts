@@ -1,10 +1,20 @@
-import { Component, OnInit, OnDestroy, signal, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, ViewChild, ElementRef, AfterViewInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MarketDataService } from '../../../../core/services/market-data.service';
 import { ChartDataPoint, ChartPeriod, StockQuote } from '../../../../core/models';
-import { Subscription, switchMap, combineLatest } from 'rxjs';
+import { Subscription} from 'rxjs';
 
-declare const Chart: any;
+interface ChartInstance {
+  destroy(): void;
+}
+
+type ChartJsConstructor = new (ctx: CanvasRenderingContext2D, config: Record<string, unknown>) => ChartInstance;
+
+declare global {
+  interface Window {
+    Chart?: ChartJsConstructor;
+  }
+}
 
 @Component({
   selector: 'app-stock-chart',
@@ -14,6 +24,8 @@ declare const Chart: any;
   styleUrls: ['./stock-chart.component.scss']
 })
 export class StockChartComponent implements OnInit, AfterViewInit, OnDestroy {
+  private marketService = inject(MarketDataService);
+
   @ViewChild('chartCanvas') chartCanvas!: ElementRef<HTMLCanvasElement>;
 
   periods: ChartPeriod[] = ['1D','1W','1M','3M','6M','1Y'];
@@ -25,10 +37,8 @@ export class StockChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   symbols = ['AAPL','MSFT','GOOGL','AMZN','TSLA','NVDA'];
 
-  private chart: any = null;
+  private chart: ChartInstance | null = null;
   private sub!: Subscription;
-
-  constructor(private marketService: MarketDataService) {}
 
   ngOnInit(): void {
     this.sub = this.marketService.quotes$.subscribe(quotes => {
@@ -90,8 +100,8 @@ export class StockChartComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private drawChart(data: ChartDataPoint[], labels: string[], lineColor: string, fillColor: string, gridColor: string, textColor: string): void {
-    if (!(window as any).Chart) return;
-    const C = (window as any).Chart;
+    if (!window.Chart) return;
+    const C = window.Chart;
     const ctx = this.chartCanvas.nativeElement.getContext('2d')!;
 
     this.chart = new C(ctx, {
@@ -122,7 +132,7 @@ export class StockChartComponent implements OnInit, AfterViewInit, OnDestroy {
             bodyColor: '#a0aec0',
             padding: 10,
             callbacks: {
-              label: (ctx: any) => ` $${ctx.parsed.y.toFixed(2)}`
+              label: (ctx: { parsed: { y: number } }) => ` $${ctx.parsed.y.toFixed(2)}`
             }
           }
         },

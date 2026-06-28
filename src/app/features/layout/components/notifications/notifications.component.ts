@@ -1,17 +1,18 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Output, EventEmitter, inject } from '@angular/core';
+
 import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-notifications',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss']
 })
 export class NotificationsComponent {
+  service = inject(NotificationService);
+
   @Output() closed = new EventEmitter<void>();
-  constructor(public service: NotificationService) {}
 
   iconMap: Record<string, string> = {
     alert: 'warning', info: 'info', success: 'check_circle', warning: 'error_outline'

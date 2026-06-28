@@ -1,10 +1,12 @@
 <div class="summary-grid">
   <!-- Skeleton loading -->
-  <ng-container *ngIf="loading">
-    <div class="summary-card card skeleton" *ngFor="let i of [1,2,3,4]"></div>
-  </ng-container>
+  @if (loading) {
+    @for (i of [1,2,3,4]; track i) {
+      <div class="summary-card card skeleton"></div>
+    }
+  }
 
-  <ng-container *ngIf="!loading && portfolio">
+  @if (!loading && portfolio) {
     <!-- Total Value -->
     <div class="summary-card card">
       <div class="card-top">
@@ -24,7 +26,6 @@
         </span>
       </p>
     </div>
-
     <!-- Total P&L -->
     <div class="summary-card card">
       <div class="card-top">
@@ -41,7 +42,6 @@
       </h2>
       <p class="card-sub">Invested: ${{ portfolio.totalInvested | number:'1.0-0' }}</p>
     </div>
-
     <!-- Day Change -->
     <div class="summary-card card">
       <div class="card-top">
@@ -55,7 +55,6 @@
       </h2>
       <p class="card-sub">{{ portfolio.dayChangePercent | number:'1.2-2' }}% from yesterday</p>
     </div>
-
     <!-- Cash Balance -->
     <div class="summary-card card">
       <div class="card-top">
@@ -67,5 +66,5 @@
       <h2 class="card-value">${{ portfolio.cashBalance | number:'1.0-0' }}</h2>
       <p class="card-sub">Available to invest</p>
     </div>
-  </ng-container>
+  }
 </div>

@@ -1,5 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, signal, inject } from '@angular/core';
+
 import { MarketDataService } from '../../core/services/market-data.service';
 import { PortfolioSummary, Holding, StockQuote } from '../../core/models';
 import { PortfolioSummaryComponent } from './components/portfolio-summary/portfolio-summary.component';
@@ -12,23 +12,23 @@ import { MarketTickerComponent } from './components/market-ticker/market-ticker.
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    CommonModule,
     PortfolioSummaryComponent,
     StockChartComponent,
     TransactionTableComponent,
     HoldingsTableComponent,
     MarketTickerComponent
-  ],
+],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  private marketService = inject(MarketDataService);
+
   portfolio = signal<PortfolioSummary | null>(null);
   holdings = signal<Holding[]>([]);
   quotes = signal<StockQuote[]>([]);
   loading = signal(true);
 
-  constructor(private marketService: MarketDataService) {}
 
   ngOnInit(): void {
     this.marketService.getPortfolioSummary().subscribe(p => this.portfolio.set(p));

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ThemeService } from './core/services/theme.service';
 
@@ -9,6 +9,9 @@ import { ThemeService } from './core/services/theme.service';
   template: `<router-outlet />`
 })
 export class AppComponent implements OnInit {
-  constructor(private themeService: ThemeService) {}
-  ngOnInit(): void { /* ThemeService effect auto-applies theme class */ }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+  private themeService = inject(ThemeService);
+
 }

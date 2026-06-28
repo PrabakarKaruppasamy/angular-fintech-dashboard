@@ -20,25 +20,28 @@
     <div class="demo-section">
       <p class="demo-label">Quick Demo Access</p>
       <div class="demo-btns">
-        <button
-          *ngFor="let cred of demoCredentials"
-          class="demo-btn"
-          [style.borderColor]="cred.color"
-          [style.color]="cred.color"
-          (click)="fillDemo(cred.email, cred.password)">
-          <span class="material-icons sm">person</span>
-          {{ cred.role }}
-        </button>
+        @for (cred of demoCredentials; track cred) {
+          <button
+            class="demo-btn"
+            [style.borderColor]="cred.color"
+            [style.color]="cred.color"
+            (click)="fillDemo(cred.email, cred.password)">
+            <span class="material-icons sm">person</span>
+            {{ cred.role }}
+          </button>
+        }
       </div>
     </div>
 
     <!-- Form -->
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
       <!-- Error -->
-      <div class="error-banner" *ngIf="error()">
-        <span class="material-icons sm">error_outline</span>
-        {{ error() }}
-      </div>
+      @if (error()) {
+        <div class="error-banner">
+          <span class="material-icons sm">error_outline</span>
+          {{ error() }}
+        </div>
+      }
 
       <!-- Email -->
       <div class="field">
@@ -53,9 +56,11 @@
             autocomplete="email"
             [class.invalid]="emailCtrl.invalid && emailCtrl.touched">
         </div>
-        <span class="field-error" *ngIf="emailCtrl.invalid && emailCtrl.touched">
-          Enter a valid email address
-        </span>
+        @if (emailCtrl.invalid && emailCtrl.touched) {
+          <span class="field-error">
+            Enter a valid email address
+          </span>
+        }
       </div>
 
       <!-- Password -->
@@ -74,15 +79,21 @@
             <span class="material-icons sm">{{ showPassword() ? 'visibility_off' : 'visibility' }}</span>
           </button>
         </div>
-        <span class="field-error" *ngIf="passwordCtrl.invalid && passwordCtrl.touched">
-          Password must be at least 6 characters
-        </span>
+        @if (passwordCtrl.invalid && passwordCtrl.touched) {
+          <span class="field-error">
+            Password must be at least 6 characters
+          </span>
+        }
       </div>
 
       <!-- Submit -->
       <button type="submit" class="btn btn-primary submit-btn" [disabled]="loading()">
-        <span class="spinner-sm" *ngIf="loading()"></span>
-        <span class="material-icons sm" *ngIf="!loading()">login</span>
+        @if (loading()) {
+          <span class="spinner-sm"></span>
+        }
+        @if (!loading()) {
+          <span class="material-icons sm">login</span>
+        }
         {{ loading() ? 'Signing in...' : 'Sign In' }}
       </button>
     </form>

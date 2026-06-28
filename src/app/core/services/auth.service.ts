@@ -1,6 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of, throwError, delay } from 'rxjs';
+import { Observable, throwError} from 'rxjs';
 import { User, UserRole } from '../models';
 
 export interface LoginCredentials {
@@ -37,6 +37,8 @@ const USER_KEY  = 'fintech_auth_user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private router = inject(Router);
+
 
   private _currentUser = signal<User | null>(null);
   private _isAuthenticated = signal<boolean>(false);
@@ -44,7 +46,7 @@ export class AuthService {
   readonly currentUser = this._currentUser.asReadonly();
   readonly isAuthenticated = this._isAuthenticated.asReadonly();
 
-  constructor(private router: Router) {
+  constructor() {
     this.restoreSession();
   }
 

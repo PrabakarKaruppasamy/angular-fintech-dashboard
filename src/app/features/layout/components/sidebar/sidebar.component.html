@@ -6,28 +6,32 @@
   </div>
 
   <!-- User card -->
-  <div class="user-card" *ngIf="authService.currentUser() as user">
-    <div class="avatar">{{ user.avatar }}</div>
-    <div class="user-info">
-      <span class="user-name">{{ user.name }}</span>
-      <span class="user-role badge" [class.badge-admin]="user.role === 'admin'">
-        {{ user.role | uppercase }}
-      </span>
+  @if (authService.currentUser(); as user) {
+    <div class="user-card">
+      <div class="avatar">{{ user.avatar }}</div>
+      <div class="user-info">
+        <span class="user-name">{{ user.name }}</span>
+        <span class="user-role badge" [class.badge-admin]="user.role === 'admin'">
+          {{ user.role | uppercase }}
+        </span>
+      </div>
     </div>
-  </div>
+  }
 
   <!-- Nav -->
   <ul class="nav-list">
-    <li *ngFor="let item of visibleNav">
-      <a class="nav-item"
-         [routerLink]="item.route"
-         routerLinkActive="active"
-         [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
-         (click)="closed.emit()">
-        <span class="material-icons">{{ item.icon }}</span>
-        <span class="nav-label">{{ item.label }}</span>
-      </a>
-    </li>
+    @for (item of visibleNav; track item) {
+      <li>
+        <a class="nav-item"
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: item.route === '/dashboard' }"
+          (click)="closed.emit()">
+          <span class="material-icons">{{ item.icon }}</span>
+          <span class="nav-label">{{ item.label }}</span>
+        </a>
+      </li>
+    }
   </ul>
 
   <!-- Footer -->
@@ -41,4 +45,13 @@
 </nav>
 
 <!-- Mobile overlay -->
-<div class="overlay" *ngIf="open" (click)="closed.emit()"></div>
+@if (open) {
+  <div
+    class="overlay"
+    role="button"
+    tabindex="0"
+    aria-label="Close sidebar"
+    (click)="closed.emit()"
+    (keydown.enter)="closed.emit()"
+    (keydown.space)="closed.emit()"></div>
+}
