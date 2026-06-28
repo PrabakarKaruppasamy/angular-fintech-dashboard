@@ -1,6 +1,7 @@
 # 📈 Angular FinTech Dashboard
 
 > **Enterprise-grade Financial Portfolio Dashboard** built with Angular 19, standalone components, Signals, NgRx, real-time Chart.js charts, SSO-style authentication, RBAC, and light/dark theme toggle.
+
 [![CI](https://github.com/PrabakarKaruppasamy/angular-fintech-dashboard/actions/workflows/ci.yml/badge.svg)](https://github.com/PrabakarKaruppasamy/angular-fintech-dashboard/actions)
 [![Angular](https://img.shields.io/badge/Angular-19-DD0031?style=flat-square&logo=angular)](https://angular.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-007ACC?style=flat-square&logo=typescript)](https://typescriptlang.org)
@@ -38,6 +39,7 @@
 - ⚡ **Angular Signals Integration** — modern reactive state handling
 - 🚀 **Lazy Loaded Feature Modules** — optimized application performance
 - 🎯 **Standalone Components Architecture** — no NgModules
+- ♿ **WCAG 2.1 Accessibility** — keyboard navigation, ARIA roles, focus management on all interactive elements
 
 ---
 
@@ -75,6 +77,7 @@ src/
 | View Transitions API | Smooth navigation animations |
 | RxJS Streams | Real-time market simulation |
 | OnPush-friendly Architecture | Performance optimization |
+| `inject()` function | Dependency injection across all components and services |
 
 ---
 
@@ -143,11 +146,17 @@ dist/angular-fintech-dashboard/browser
 
 ---
 
-## 🧪 Run Unit Tests
+## 🧪 Quality Checks
 
 ```bash
-ng test
+# Lint
+ng lint
+
+# Production build verification
+ng build --configuration production
 ```
+
+> Unit test suite is on the roadmap — see Future Improvements.
 
 ---
 
@@ -246,14 +255,14 @@ To integrate a real backend:
 
 ## 📈 Future Improvements
 
+- Unit test coverage (Jasmine/Karma specs)
+- Cypress E2E testing
 - Real WebSocket market feeds
 - Server-side rendering (SSR)
 - Microfrontend architecture
 - Advanced analytics dashboard
 - AI-powered investment insights
-- Cypress E2E testing
 - Docker deployment
-- GitHub Actions CI/CD
 - Internationalization (i18n)
 
 ---
@@ -264,7 +273,6 @@ To integrate a real backend:
 
 Frontend Architect & Technical Lead  
 14+ years building enterprise Angular applications for global banking and fintech organizations.
-
 
 ### Connect
 
